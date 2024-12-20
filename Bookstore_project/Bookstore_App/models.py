@@ -55,9 +55,9 @@ class Customer(CustomUser):
         return self.first_name + " " + self.last_name
 
 class Book(models.Model):
-    title = models.Charfield(max_length=200, blank=False)
-    author = models.Charfield(max_length=100, blank=True, default = "Unknown author")
-    Pages = models.Integerfield(default = 0)
+    title = models.CharField(max_length=200, blank=False)
+    author = models.CharField(max_length=100, blank=True, default = "Unknown author")
+    Pages = models.IntegerField(default = 0)
     book_id = models.UUIDField(
         primary_key=True,  # Makes it the primary key for the model
         default=uuid.uuid4,  # Automatically generate a new UUID
@@ -72,11 +72,11 @@ class Book(models.Model):
     SPANISH= "Spanish"
     OTHER = "Other"
     LANGUAGE_CHOICES =[
-        (ENGLISH, "English")
-        (KOREAN, "Korean")
-        (INDONESIAN, "Bahasa")
-        (SPANISH, "Spanish")
-        (OTHER,"Other")
+        (ENGLISH, "English"),
+        (KOREAN, "Korean"),
+        (INDONESIAN, "Bahasa"),
+        (SPANISH, "Spanish"),
+        (OTHER,"Other"),
     ]
 
     language = models.CharField(
