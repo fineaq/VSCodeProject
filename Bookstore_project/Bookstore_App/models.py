@@ -110,15 +110,19 @@ class Book(models.Model):
     )
     
     def is_in_stock(self):
+        #Check if book stock isnt zero
         return self.stock > 0
 
     def get_customers(self):
+        #Get any customer that ever buy this book
         return [transaction.customer for transaction in self.transactions.all()]
 
     def total_sales_quantity(self):
+        #Get total quantity of this book that have been sold
         return sum(transaction.book_quantity for transaction in self.transactions.all())
 
     def total_sales_cash(self):
+        #Get total of cash that this book has earned
         return sum(transaction.total_cash for transaction in self.transactions.all())
 
     def __str__(self):
