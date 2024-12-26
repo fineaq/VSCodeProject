@@ -1,17 +1,4 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
-    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
-    <title>{% block title %}Home - BookStore{% endblock %}</title>
-</head>
-
-<body>
-    {% load static %}
 
 <header class="header" id="header">
     <nav class="nav container">
@@ -44,13 +31,4 @@
             </a>
         </div>
     </nav>
-    </header>
-    <main>
-        {% block content %}
-            <h1>Welcome to BookStore</h1>
-            <p>Explore our collection of books.</p>
-        {% endblock %}
-    </main>
-</body>
-
-</html>
+</header>
