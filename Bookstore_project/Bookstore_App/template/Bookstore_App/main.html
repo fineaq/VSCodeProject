@@ -1,56 +1,36 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'Bookstore_App/navbar.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
-    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
-    <title>{% block title %}Home - BookStore{% endblock %}</title>
-</head>
+{% block title %}Home - BookStore{% endblock %}
 
-<body>
-    {% load static %}
+{% block content %}
+<div class="main-container">
+    <div class="styled-container welcome-container">
+        <h1>Welcome {{ user.username }} to BookStore</h1>
+        <p>Explore our collection of books.</p>
+    </div>
 
-<header class="header" id="header">
-    <nav class="nav container">
-        <a href="#" class="nav__logo">Logo</a>
-
-        <div class="nav-left">
-            <a href="#" class="logo">BookStore</a>
-            <a href="#">Categories</a>
-        </div>
-
-        <div class="nav-center">
-            <div class="search__form">
-                <form id="searchForm" method="GET" action="/search">
-                    <input type="text" class="search__input" id="searchInput" placeholder="Search..." name="query">
-                    <button type="submit" class="search__button">
-                        <i class="ri-search-line search__icon"></i>
-                    </button>
-                </form>
+    <div class="styled-container card-container">
+        {% for book in books %}
+            <div class="card">
+                <img src="{{ book.cover.url }}" alt="{{ book.title }} cover" class="card-img">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">By {{ book.author }}</p>
+                    <p class="card-text">Price: ${{ book.price }}</p>
+                    <p class="card-text">Language: {{ book.get_language_display }}</p>
+                    <a href="{% url 'book_detail' book.book_id %}" class="btn btn-primary">View Details</a>
+                </div>
             </div>
-        </div>
+        {% endfor %}
+    </div>
 
-        <div class="nav-right">
-            <a href="/login" class="login_button">
-                <i class="ri-user-line"></i>
-                Login
-            </a>
-            <a href="/cart" class="cart_button">
-                <i class="ri-shopping-cart-line"></i>
-                Cart
-            </a>
-        </div>
-    </nav>
-    </header>
-    <main>
-        {% block content %}
-            <h1>Welcome to BookStore</h1>
-            <p>Explore our collection of books.</p>
-        {% endblock %}
-    </main>
-</body>
-
-</html>
+    <div class="pagination-buttons">
+        {% if books.has_previous %}
+            <a href="?page={{ books.previous_page_number }}" class="btn btn-secondary">Back</a>
+        {% endif %}
+        {% if books.has_next %}
+            <a href="?page={{ books.next_page_number }}" class="btn btn-secondary">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

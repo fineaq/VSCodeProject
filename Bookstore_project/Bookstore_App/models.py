@@ -65,7 +65,6 @@ class Customer(CustomUser):
         default='English'
     )
 
-
     class Meta:
         verbose_name = "Customer"
         verbose_name_plural = "Customers"
@@ -74,59 +73,76 @@ class Customer(CustomUser):
         return Transaction.objects.filter(customer=self)
 
     def __str__(self):
-        return f"{self.title} by {self.author}"
+        return f"{self.first_name} {self.last_name}"
 
 
 class Book(models.Model):
-    
-    LANGUAGE_CHOICES =[
-        (ENGLISH, "English"),
-        (KOREAN, "Korean"),
-        (INDONESIAN, "Bahasa"),
-        (SPANISH, "Spanish"),
-        (OTHER,"Other"),
+    # Language choices
+    LANGUAGE_CHOICES = [
+        ("ENGLISH", "English"),
+        ("KOREAN", "Korean"),
+        ("INDONESIAN", "Bahasa"),
+        ("SPANISH", "Spanish"),
+        ("OTHER", "Other"),
+    ]
+
+    # Type choices
+    BOOK_TYPE_CHOICES = [
+        ("COMIC", "Comic"),
+        ("MAGAZINE", "Magazine"),
+        ("NOVEL", "Novel"),
+        ("TEXTBOOK", "Textbook"),
+        ("OTHER", "Other"),
     ]
 
     title = models.CharField(max_length=100, blank=False)
-    author = models.CharField(max_length=100, blank=True, default = "Unknown author")
-    publisher =  models.CharField(max_length=100, blank=True, default = "Unknown")
-    pages = models.IntegerField(default = 0)
+    author = models.CharField(max_length=100, blank=True, default="Unknown author")
+    publisher = models.CharField(max_length=100, blank=True, default="Unknown")
+    pages = models.IntegerField(default=0)
     book_id = models.UUIDField(
-        primary_key=True,  # Makes it the primary key for the model
-        default=uuid.uuid4,  # Automatically generate a new UUID
-        editable=False  # Prevents manual editing in forms
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
     )
     pub_date = models.DateField(blank=True, null=True)
     cover = models.ImageField(upload_to='cover/', blank=True, null=True, default='default_cover.jpg')
-    price = models.DecimalField(max_digits=10, decimal_places=2,blank=False)
-    stock = models.IntegerField(default = 0)
+    price = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
+    stock = models.IntegerField(default=0)
     genres = models.ManyToManyField('Genre', blank=True)
     synopsis = models.TextField(blank=True, default="No Synopsis")
-
     language = models.CharField(
-        max_length=20, 
+        max_length=20,
         choices=LANGUAGE_CHOICES,
-        default=OTHER
+        default="OTHER"
     )
-    
+
+    # New field for book type
+    book_type = models.CharField(
+        max_length=20,
+        choices=BOOK_TYPE_CHOICES,
+        default="OTHER",
+        verbose_name="Type of Book"
+    )
+
     def is_in_stock(self):
-        #Check if book stock isnt zero
+        # Check if book stock isn't zero
         return self.stock > 0
 
     def get_customers(self):
-        #Get any customer that ever buy this book
+        # Get any customer that ever bought this book
         return [transaction.customer for transaction in self.transactions.all()]
 
     def total_sales_quantity(self):
-        #Get total quantity of this book that have been sold
+        # Get total quantity of this book that has been sold
         return sum(transaction.book_quantity for transaction in self.transactions.all())
 
     def total_sales_cash(self):
-        #Get total of cash that this book has earned
+        # Get total cash that this book has earned
         return sum(transaction.total_cash for transaction in self.transactions.all())
 
     def __str__(self):
-        return self.title + " by " + self.author
+        return f"{self.title} by {self.author}"
+
 
 class Genre(models.Model):
     FANTASY = "Fantasy"

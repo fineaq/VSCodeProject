@@ -14,7 +14,7 @@
   --border-color: hsl(230, 25%, 80%);
 
   /* Typography */
-  --body-font: "Syne", sans-serif;
+  --body-font: "Arial", sans-serif;
   --font-medium: 500;
   --font-semi-bold: 600;
   --normal-font-size: 1rem;
@@ -54,7 +54,7 @@ button {
 }
 
 /* Navbar Container */
-.nav {
+.nav-container {
   position: fixed; /* Makes the navbar fixed on top */
   top: 0;
   left: 0;
@@ -103,6 +103,7 @@ button {
 }
 
 /* Style the login button */
+.profile_button,
 .login_button {
   display: inline-flex;
   align-items: center;
@@ -118,16 +119,19 @@ button {
   cursor: pointer;
 }
 
+.profile_button,
 .login_button i {
   margin-right: 4px;
 }
 
+.profile_button:hover,
 .login_button:hover {
   background-color: #2a72c0;
   transform: scale(1.05);
   color: white; /* Ensures the text stays white during hover */
 }
 
+.profile_button,
 .login_button:focus {
   outline: none;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -222,4 +226,67 @@ button {
   .nav-right a i {
     font-size: 20px; /* Adjust icon size */
   }
+}
+/* END OF NAVBAR*/
+
+/* Start Of main */
+.styled-container {
+  margin: 10px 5px; /* Adds margin to the top and bottom and centers horizontally */
+  padding: 10px;
+
+  
+  
+  
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  border: 2px solid #ddd; /* Border around the rectangle */
+  border-radius: 5px; /* Makes the rectangle rounded */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adds a shadow for a 3D effect */
+  background-color: rgb(246, 246, 246); /* Background color of the rectangle */
+}
+
+.card {
+  width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  background: #fff;
+}
+
+.card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination-buttons .btn {
+  margin: 0 10px;
 }

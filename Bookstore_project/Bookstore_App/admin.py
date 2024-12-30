@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, Staff, Customer, Address
+from .models import *
 
 # Inline for the Address model in the Customer admin page
 class AddressInline(admin.StackedInline):
@@ -22,3 +22,8 @@ class CustomerAdmin(admin.ModelAdmin):
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
     list_display = ('street', 'city', 'state', 'country', 'postal_code')
+
+@admin.register(Genre)
+class GenreAdmin(admin.ModelAdmin):
+    list_display = ('name',)  # Display the name field in the admin list view
+    search_fields = ('name',)  # Add a search bar for the name field

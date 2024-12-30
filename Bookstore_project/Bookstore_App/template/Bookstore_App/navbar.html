@@ -1,34 +1,69 @@
 {% load static %}
 
-<header class="header" id="header">
-    <nav class="nav container">
-        <a href="#" class="nav__logo">Logo</a>
+<!DOCTYPE html>
+<html lang="en">
 
-        <div class="nav-left">
-            <a href="#" class="logo">BookStore</a>
-            <a href="#">Categories</a>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+    <title>{% block title %}BookStore{% endblock %}</title>
+</head>
 
-        <div class="nav-center">
-            <div class="search__form">
-                <form id="searchForm" method="GET" action="/search">
-                    <input type="text" class="search__input" id="searchInput" placeholder="Search..." name="query">
-                    <button type="submit" class="search__button">
-                        <i class="ri-search-line search__icon"></i>
-                    </button>
-                </form>
+<body>
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="#" class="nav__logo">Logo</a>
+
+            <div class="nav-left">
+                <a href="#" class="logo">BookStore</a>
+                <a href="#">Categories</a>
             </div>
-        </div>
 
-        <div class="nav-right">
-            <a href="/login" class="login_button">
-                <i class="ri-user-line"></i>
-                Login
-            </a>
-            <a href="/cart" class="cart_button">
-                <i class="ri-shopping-cart-line"></i>
-                Cart
-            </a>
-        </div>
-    </nav>
-</header>
+            <div class="nav-center">
+                <div class="search__form">
+                    <form id="searchForm" method="GET" action="/search">
+                        <input type="text" class="search__input" id="searchInput" placeholder="Search..." name="query">
+                        <button type="submit" class="search__button">
+                            <i class="ri-search-line search__icon"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                {% if user.is_authenticated %}
+                    <a href="/profile" class="profile_button">
+                        <i class="ri-user-line"></i>
+                        {{ user.username }}
+                    </a>
+                    <a href="/logout" class="logout_button">
+                        <i class="ri-logout-box-r-line"></i>
+                        Log Out
+                    </a>
+                {% else %}
+                    <a href="/login" class="login_button">
+                        <i class="ri-login-box-line"></i>
+                        Login
+                    </a>
+                    <a href="/signup" class="signup_button">
+                        <i class="ri-user-line"></i>
+                        Sign Up
+                    </a>
+                {% endif %}
+                <a href="{% if user.is_authenticated %}/cart{% else %}/login{% endif %}" class="cart_button">
+                    <i class="ri-shopping-cart-line"></i>
+                    Cart
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+</html>

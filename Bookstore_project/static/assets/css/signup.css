@@ -1,4 +1,4 @@
-/* Login Page Container */
+/* signup Page Container */
 
 * {
     margin: 0;
@@ -16,7 +16,7 @@ body {
     min-height: 100vh;
 }
 
-.login-container {
+.signup-container {
     width: 100%;
     max-width: 90%;
     padding: 20px;
@@ -27,26 +27,27 @@ body {
 }
 
 /* Title */
-.login-title {
+.signup-title {
     font-size: 1.8rem;
     margin-bottom: 20px;
     color: #333;
 }
 
 /* Form */
-.login-form .form-group {
+.signup-form .form-group {
     margin-bottom: 15px;
     text-align: left;
 }
 
-.login-form label {
+.signup-form label {
     font-size: 14px;
     color: #555;
     display: block;
     margin-bottom: 5px;
 }
 
-.login-form input {
+.signup-form input,
+.signup-form select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -54,44 +55,34 @@ body {
     font-size: 14px;
 }
 
-.login-form input:focus {
+.signup-form input:focus,
+.signup-form select:focus {
     outline: none;
     border-color: #4f9ede;
     box-shadow: 0 0 3px #4f9ede;
 }
 
-/* Options: Remember Me & Forgot Password */
-/* Align the checkbox and text side by side */
-.remember-me {
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Space between checkbox and text */
-    font-size: 14px; /* Adjust text size to match */
-    color: #777; /* Optional: Add a consistent color */
-    margin: 0; /* Remove extra margin around the label */
+/* Style for Checkboxes (Favorite Genres) */
+.signup-form .form-check-input {
+    margin-right: 10px;  /* Space between checkbox and label */
 }
 
-/* Forgot Password link */
-.forgot-password {
-    text-decoration: none;
-    color: #4f9ede;
+.signup-form .form-check-label {
     font-size: 14px;
+    color: #555;
 }
 
-.forgot-password:hover {
-    text-decoration: underline;
+/* Style for the dropdown (Preferred Language) */
+.signup-form select {
+    -webkit-appearance: none;  /* Remove default dropdown arrow in some browsers */
+    -moz-appearance: none;
+    appearance: none;
+    background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="none" stroke="%23555" stroke-width="1.5" d="M2 6l6 6 6-6" /%3E%3C/svg%3E') no-repeat right 10px center;
+    background-size: 10px;
 }
 
-/* General spacing between the two sections */
-.form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-/* Login Button */
-.login-button {
+/* signup Button */
+.signup-button {
     width: 100%;
     padding: 10px;
     background-color: #4f9ede;
@@ -104,22 +95,6 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.login-button:hover {
+.signup-button:hover {
     background-color: #2a72c0;
-}
-
-/* Signup Link */
-.signup-text {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #555;
-}
-
-.signup-text a {
-    color: #4f9ede;
-    text-decoration: none;
-}
-
-.signup-text a:hover {
-    text-decoration: underline;
 }
